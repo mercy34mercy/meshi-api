@@ -1,0 +1,30 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:$COMMIT_SHA',-t, 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:latest','-f',./Dockerfile,'.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:latest']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:$COMMIT_SHA']
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - 'cat config_template.yaml | sed "s/\COMMIT_SHA/$COMMIT_SHA/" > config.yaml && gcloud run services replace config.yaml --region asia-northeast1'
+
+- id: delete-old-images
+  name: asia-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner-cli:latest
+  args:
+    # 削除するリポジトリ名
+    - --repo=asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api
+    # 最新の3つだけを残す場合
+    - --keep=3
+    # 削除対象とするタグの正規表現。ここではすべてのイメージを対象とする
+    - --tag-filter-any=.*
+
+options:
+  logging: CLOUD_LOGGING_ONLY 
+
+images: 
+  - 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:latest'
+  - 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:$COMMIT_SHA'

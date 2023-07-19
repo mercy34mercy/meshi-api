@@ -1,6 +1,5 @@
 use rocket::{get, launch, routes};
 use rocket::serde::json::Json;
-use dotenv::dotenv;
 
 mod api {
     pub mod postgre;
@@ -28,6 +27,5 @@ async fn store() -> Result<Json<Vec<api::postgre::Store>>, Json<String>> {
 
 #[launch]
 fn rocket() -> _ {
-    dotenv().ok();
     rocket::build().mount("/", routes![index, goods,category,store])
 }

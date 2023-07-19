@@ -140,8 +140,9 @@ async fn get_goods() -> Result<Vec<Good>, Box<dyn Error>> {
 }
 
 pub fn get_client() -> Result<Postgrest, Box<dyn std::error::Error>> {
-    dotenv::var("SUPABASE_PUBLIC_API_KEY").map(|key| {
-        Postgrest::new("https://zzlzipzjibyvcltibmvu.supabase.co/rest/v1/")
-            .insert_header("apikey", key)
-    }).map_err(|e| e.into())
+    let api_key = std::env::var("SUPABASE_PUBLIC_API_KEY").expect("SUPABASE_PUBLIC_API_KEY must be set");
+
+    let client = Postgrest::new("https://zzlzipzjibyvcltibmvu.supabase.co/rest/v1/").insert_header("apikey", api_key);
+
+    Ok(client)
 }
