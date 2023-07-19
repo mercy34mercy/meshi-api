@@ -9,7 +9,7 @@ COPY . .
 # Install production dependencies and build a release artifact.
 RUN cargo build --release
 
-FROM alpine:3.9
+FROM debian:buster-slim
 
 COPY --from=BUILDER /usr/src/app/target/release/meshi-api meshi-api
 
@@ -18,4 +18,4 @@ COPY --from=BUILDER /usr/src/app/target/release/meshi-api meshi-api
 ENV PORT 8000
 
 # Run the web service on container startup.
-ENTRYPOINT ["/meshi-api"]
+ENTRYPOINT ["./meshi-api"]
