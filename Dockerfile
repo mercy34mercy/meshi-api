@@ -11,7 +11,7 @@ RUN cargo build --release
 
 FROM alpine:3.9
 
-COPY --from=BUILDER /usr/src/app/target/release/meshi-api /target/release/meshi-api
+COPY --from=BUILDER /usr/src/app/target/release/meshi-api target/release/meshi-api
 
 # Service must listen to $PORT environment variable.
 # This default value facilitates local development.
