@@ -1,6 +1,6 @@
 # Use the official Rust image.
 # https://hub.docker.com/_/rust
-FROM rust as BUILDER
+FROM rust:slim-buster as BUILDER
 
 # Copy local code to the container image.
 WORKDIR /usr/src/app
@@ -18,4 +18,4 @@ COPY --from=BUILDER /usr/src/app/target/release/meshi-api /target/release/meshi-
 ENV PORT 8000
 
 # Run the web service on container startup.
-ENTRYPOINT ["target/release/cloud-run-rust-test"]
+ENTRYPOINT ["target/release/meshi-api"]
