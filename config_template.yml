@@ -1,12 +1,12 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: datadog
+  name: meshi-api
 spec:
   template:
     spec:
       containers:
-      - image: 'asia-northeast1-docker.pkg.dev/sre-practice-392013/dev/datadog:COMMIT_SHA'
+      - image: 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:$COMMIT_SHA'
         ports:
           - containerPort: 8000
         env:
