@@ -15,4 +15,4 @@ spec:
               secretKeyRef:
                 key: '1'
                 name: SUPABASE_PUBLIC_API_KEY
-      serviceAccountName: cloudrun@meshi-393314.iam.gserviceaccount.com
+  serviceAccountName: cloudrun@meshi-393314.iam.gserviceaccount.com

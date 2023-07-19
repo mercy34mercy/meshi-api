@@ -18,4 +18,4 @@ COPY --from=BUILDER /usr/src/app/target/release/meshi-api meshi-api
 ENV PORT 8000
 
 # Run the web service on container startup.
-ENTRYPOINT ["./meshi-api"]
+CMD ["./meshi-api"]
