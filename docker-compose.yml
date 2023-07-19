@@ -1,0 +1,7 @@
+# docker-compose.yml
+version: '3'
+services:
+  meshi-api:
+    build: .
+    ports:
+      - "8000:8000"
