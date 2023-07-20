@@ -5,6 +5,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: cloudrun@meshi-393314.iam.gserviceaccount.com
       containers:
       - image: 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:$COMMIT_SHA'
         ports:
@@ -15,4 +16,3 @@ spec:
               secretKeyRef:
                 key: '1'
                 name: SUPABASE_PUBLIC_API_KEY
-  serviceAccountName: cloudrun@meshi-393314.iam.gserviceaccount.com
