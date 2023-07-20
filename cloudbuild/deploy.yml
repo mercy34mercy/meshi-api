@@ -10,7 +10,7 @@ steps:
   entrypoint: 'bash'
   args:
     - '-c'
-    - 'cat config_template.yaml | sed "s/\COMMIT_SHA/$COMMIT_SHA/" > config.yaml && gcloud run services replace config.yaml --region asia-northeast1'
+    - 'cat config_template.yml | sed "s/\COMMIT_SHA/$COMMIT_SHA/" > config.yaml && gcloud run services replace config.yaml --region asia-northeast1'
 
 - id: delete-old-images
   name: asia-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner-cli:latest
