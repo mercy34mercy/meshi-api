@@ -9,6 +9,7 @@ COPY . .
 # Install production dependencies and build a release artifact.
 RUN cargo install --path .
 
+ENV ROCKET_ADDRESS=0.0.0.0
 
 # Run the web service on container startup.
 CMD ["meshi-api"]
