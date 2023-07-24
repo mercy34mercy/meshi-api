@@ -7,7 +7,7 @@ spec:
     spec:
       serviceAccountName: cloudrun@meshi-393314.iam.gserviceaccount.com
       containers:
-      - image: 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:$COMMIT_SHA'
+      - image: 'asia-northeast1-docker.pkg.dev/meshi-393314/dev/meshi-api:COMMIT_SHA'
         ports:
           - containerPort: 8000
         env:

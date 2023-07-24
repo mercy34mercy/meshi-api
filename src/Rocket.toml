@@ -1,9 +1,9 @@
 [debug]
-address = "127.0.0.1"
+address = "0.0.0.0"
 log_level = "debug"
-port = 8000
+port = 8080
 
 [release]
 address = "0.0.0.0"
 log_level = "debug"
-port = 8000
+port = 8080
