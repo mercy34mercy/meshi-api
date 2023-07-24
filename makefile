@@ -2,7 +2,9 @@ include .env
 export
 
 run:
-	docker-compose up -d
+	cargo run
+up:
+	docker-compose up -d 
 
 down:
 	docker-compose down

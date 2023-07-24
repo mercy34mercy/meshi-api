@@ -1,5 +1,7 @@
 use rocket::{get, launch, routes};
 use rocket::serde::json::Json;
+use serde_json::Value;
+use serde_json::json;
 
 mod api {
     pub mod postgre;
@@ -8,6 +10,14 @@ mod api {
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
+}
+
+#[get("/test")]
+fn test() -> Json<Value> {
+    let response = json!({
+        "name": "masashi",
+    });
+    Json(response)
 }
 
 #[get("/goods")]
@@ -27,5 +37,12 @@ async fn store() -> Result<Json<Vec<api::postgre::Store>>, Json<String>> {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, goods,category,store])
+    // let api_key = std::env::var("SUPABASE_PUBLIC_API_KEY").expect("SUPABASE_PUBLIC_API_KEY must be set");
+    // print!("{}", api_key);
+    let config = rocket::Config {
+        port: 8080,
+        ..rocket::Config::default()
+    };
+    rocket::custom(config)
+    .mount("/", routes![index, goods, category, store,test])
 }
