@@ -11,5 +11,7 @@ RUN cargo install --path .
 
 ENV ROCKET_ADDRESS=0.0.0.0
 
+EXPOSE 8080
+
 # Run the web service on container startup.
 CMD ["meshi-api"]
