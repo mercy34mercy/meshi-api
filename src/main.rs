@@ -2,6 +2,7 @@ use rocket::{get, launch, routes};
 use rocket::serde::json::Json;
 use serde_json::Value;
 use serde_json::json;
+use std::net::Ipv4Addr;
 
 mod api {
     pub mod postgre;
@@ -41,6 +42,7 @@ fn rocket() -> _ {
     // print!("{}", api_key);
     let config = rocket::Config {
         port: 8080,
+        address: Ipv4Addr::new(0, 0, 0, 0).into(),
         ..rocket::Config::default()
     };
     rocket::custom(config)
